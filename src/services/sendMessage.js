@@ -9,7 +9,6 @@ async function sendMessage(text) {
     console.log(`Message sent. Timestamp: ${res.ts}`);
     return res;
   } catch (error) {
-    // SlackApiError has .data with error info
     if (error.data) {
       console.error(`Slack API error (postMessage): ${error.data.error}`);
     } else {

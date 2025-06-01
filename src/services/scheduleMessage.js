@@ -1,22 +1,17 @@
+const { getFutureTimestamp } = require('../utils/time');
 const { slackClient, channelId } = require('../config/slackClient');
-const { getScheduleTimestamp } = require('../utils/time');
 
 async function scheduleMessage(text, minutes = 1) {
   try {
-    const postAt = getScheduleTimestamp(minutes);
-    const res = await slackClient.chat.scheduleMessage({
-      channel: channelId,
-      text: text,
-      post_at: postAt
+    const postAt = getFutureTimestamp(minutes);
+    const response = await slackClient.chat.scheduleMessage({
+       channel: channelId,
+      text,
+      post_at: postAt,
     });
-    console.log(`Message scheduled. Scheduled message ID: ${res.scheduled_message_id}`);
-    return res;
+    console.log(`Message scheduled after ${minutes} minutes. Schedule ID: ${response.scheduled_message_id}`);
   } catch (error) {
-    if (error.data) {
-      console.error(`Slack API error (scheduleMessage): ${error.data.error}`);
-    } else {
-      console.error(`Error scheduling message: ${error.message}`);
-    }
+    console.error('Error scheduling message:', error.data?.error || error.message);
   }
 }
 

@@ -1,6 +1,6 @@
-function getScheduleTimestamp(minutesFromNow = 1) {
-  const timestamp = Math.floor(Date.now() / 1000) + minutesFromNow * 60;
-  return timestamp;
+function getFutureTimestamp(minutes = 1) {
+  const now = Math.floor(Date.now() / 1000);
+  return now + minutes * 60;
 }
 
-module.exports = { getScheduleTimestamp };
+module.exports = { getFutureTimestamp };
