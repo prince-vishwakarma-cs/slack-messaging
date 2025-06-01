@@ -1,0 +1,16 @@
+{
+  "name": "slack-messaging-app",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@slack/web-api": "^7.9.2",
+    "dotenv": "^16.5.0"
+  }
+}
