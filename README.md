@@ -1,16 +1,12 @@
-```
 # Slack Messaging App (Node.js)
 
-This repository contains a modular Node.js application for performing basic Slack messaging operations—sending, scheduling, retrieving, updating, and deleting messages—within a Slack Developer Sandbox. All sensitive credentials are stored in environment variables, and each function is implemented with robust error handling.  
-
----
+This repository contains a modular Node.js application for performing basic Slack messaging operations—sending, scheduling, retrieving, updating, and deleting messages—within a Slack Developer Sandbox.  
 
 ## Table of Contents
 
 1. [Prerequisites](#prerequisites)  
-2. [Folder Structure](#folder-structure)  
-3. [Environment Configuration](#environment-configuration)  
-4. [Installation](#installation)  
+2. [Environment Configuration](#environment-configuration)  
+3. [Installation](#installation)  
 5. [Usage](#usage)  
    - [Send a Message](#send-a-message)  
    - [Schedule a Message](#schedule-a-message)  
@@ -39,52 +35,6 @@ Before using this application, ensure that:
 4. You have obtained a **Bot User OAuth Access Token** (begins with `xoxb-`) for your Slack App.  
 5. You have identified the **Channel ID** of the channel in your sandbox where messages will be posted. (Channel IDs for public channels begin with `C`, private channels begin with `G`.)  
 
----
-
-## Folder Structure
-
-```
-
-slack-messaging-app/
-├── src/
-│   ├── services/
-│   │   ├── sendMessage.js
-│   │   ├── scheduleMessage.js
-│   │   ├── getMessage.js
-│   │   ├── updateMessage.js
-│   │   └── deleteMessage.js
-│   ├── utils/
-│   │   └── time.js
-│   ├── config/
-│   │   └── slackClient.js
-│   └── index.js
-├── .env
-├── .env.example
-├── .gitignore
-├── package.json
-└── README.md
-
-````
-
-- `src/services/`  
-  Contains individual modules for each Slack API operation (send, schedule, retrieve, update, delete).  
-- `src/utils/`  
-  Contains utility functions (e.g., computing future Unix timestamps for scheduling).  
-- `src/config/`  
-  Contains the Slack WebClient initialization (reads environment variables).  
-- `src/index.js`  
-  The main entry point that parses command-line arguments and invokes the appropriate service function.  
-- `.env`  
-  Stores sensitive credentials (Slack bot token and channel ID). **Do not commit this file.**  
-- `.env.example`  
-  Template showing which environment variables are required (no real secrets).  
-- `.gitignore`  
-  Excludes `node_modules/` and `.env`.  
-- `package.json`  
-  Lists project dependencies (`@slack/web-api`, `dotenv`) and metadata.  
-
----
-
 ## Environment Configuration
 
 1. **Copy `.env.example` to `.env`:**
@@ -93,47 +43,19 @@ slack-messaging-app/
    cp .env.example .env
 ````
 
-2. **Populate `.env` with your credentials:**
-
-   ```dotenv
-   # .env
-   SLACK_BOT_TOKEN=xoxb-your-bot-token
-   SLACK_CHANNEL_ID=C1234567890
-   ```
-
-   * `SLACK_BOT_TOKEN` – Bot User OAuth Access Token for your Slack App.
-   * `SLACK_CHANNEL_ID` – ID of the channel in which you want to post messages.
-
-3. **Verify** that `.env` is listed in `.gitignore` so that sensitive data is not committed:
-
-   ```gitignore
-   node_modules/
-   .env
-   ```
-
----
-
 ## Installation
 
 1. **Clone this repository** (if you have not already):
 
    ```bash
    git clone https://your-repo-url.git
-   cd slack-messaging-app
+   cd task
    ```
 
 2. **Install dependencies**:
 
    ```bash
    npm install
-   ```
-
-3. **Verify Node version**:
-   The application requires Node.js v14.x or higher. Confirm with:
-
-   ```bash
-   node -v
-   # Example output: v16.20.2
    ```
 
 ---
