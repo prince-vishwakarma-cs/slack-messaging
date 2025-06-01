@@ -83,7 +83,7 @@ node index.js send "Hello from Slack Messaging App"
 
 ### Schedule a Message
 
-Schedule a message to post 1 minute in the future (default). If desired, you can modify `src/utils/time.js` to adjust scheduling logic.
+Schedule a message to post 1 minute in the future (default). If desired, you can pass time in minutes after message.
 
 ```bash
 node index.js schedule "This message will appear in one minute" < minutes >
@@ -94,7 +94,7 @@ node index.js schedule "This message will appear in one minute" < minutes >
 Retrieve the contents of an existing message, given its timestamp.
 
 ```bash
-node src/index.js get 1624391234.000200
+node index.js get 1624391234.000200
 ```
 
 ### Update a Message
@@ -102,7 +102,7 @@ node src/index.js get 1624391234.000200
 Update (edit) an existing message’s text by providing its timestamp and new content.
 
 ```bash
-node src/index.js update 1624391234.000200 "This text has been edited."
+node index.js update 1624391234.000200 "This text has been edited."
 ```
 
 ### Delete a Message
@@ -110,5 +110,5 @@ node src/index.js update 1624391234.000200 "This text has been edited."
 Delete a message from the channel by its timestamp.
 
 ```bash
-node src/index.js delete 1624391234.000200
+node index.js delete 1624391234.000200
 ```
