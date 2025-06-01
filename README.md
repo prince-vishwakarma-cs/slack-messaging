@@ -48,7 +48,7 @@ Before using this application, ensure that:
 1. **Clone this repository** (if you have not already):
 
    ```bash
-   git clone https://your-repo-url.git
+   git clone https://github.com/prince-vishwakarma-cs/slack-messaging.git
    cd task
 
 2. **Install dependencies**:
@@ -59,11 +59,11 @@ Before using this application, ensure that:
 
 ## Usage
 
-All commands are executed from the project root. The entry point is `src/index.js`. Use one of the following commands to perform a Slack messaging operation.
+All commands are executed from the project root. The entry point is `index.js`. Use one of the following commands to perform a Slack messaging operation.
 
 ```bash
 # Format:
-node src/index.js <operation> [arguments]
+node index.js <operation> [arguments]
 
 # Operations:
 #   send       : Send a new message.
@@ -78,24 +78,16 @@ node src/index.js <operation> [arguments]
 Post a new message immediately.
 
 ```bash
-node src/index.js send "Hello from Slack Messaging App"
+node index.js send "Hello from Slack Messaging App"
 ```
-
-* **Function invoked**: `sendMessage(text)`
-* **Slack method**: `chat.postMessage`
-* **Output**: Logs “Message sent. Timestamp: <ts>” on success.
 
 ### Schedule a Message
 
 Schedule a message to post 1 minute in the future (default). If desired, you can modify `src/utils/time.js` to adjust scheduling logic.
 
 ```bash
-node src/index.js schedule "This message will appear in one minute"
+node index.js schedule "This message will appear in one minute" < minutes >
 ```
-
-* **Function invoked**: `scheduleMessage(text)`
-* **Slack method**: `chat.scheduleMessage` (with `post_at` set to current time + 60 seconds)
-* **Output**: Logs “Message scheduled. Scheduled message ID: <id>” on success.
 
 ### Retrieve a Message
 
@@ -105,10 +97,6 @@ Retrieve the contents of an existing message, given its timestamp.
 node src/index.js get 1624391234.000200
 ```
 
-* **Function invoked**: `getMessage(ts)`
-* **Slack method**: `conversations.history` (with `latest=<ts>`, `inclusive=true`, `limit=1`)
-* **Output**: Logs “Message at <ts>: <text>” if found, or “No message found at timestamp <ts>.”
-
 ### Update a Message
 
 Update (edit) an existing message’s text by providing its timestamp and new content.
@@ -117,70 +105,10 @@ Update (edit) an existing message’s text by providing its timestamp and new co
 node src/index.js update 1624391234.000200 "This text has been edited."
 ```
 
-* **Function invoked**: `updateMessage(ts, newText)`
-* **Slack method**: `chat.update`
-* **Output**: Logs “Message updated. New text: \<edited\_text>” on success.
-
 ### Delete a Message
 
 Delete a message from the channel by its timestamp.
 
 ```bash
 node src/index.js delete 1624391234.000200
-```
-
-* **Function invoked**: `deleteMessage(ts)`
-* **Slack method**: `chat.delete`
-* **Output**: Logs “Message deleted. Timestamp: <ts>” on success.
-
----
-
-## Error Handling
-
-Every service function employs `async/await` within a `try/catch` block. Errors are handled as follows:
-
-1. **Slack API errors** (returned as `error.data.error`) are logged with a clear description:
-
-   ```
-   Slack API error (<method>): <error_code>
-   ```
-2. **Network or unexpected runtime errors** (thrown by the client library) are logged as:
-
-   ```
-   Error <operation>: <error.message>
-   ```
-3. If environment variables are missing or invalid, the application will throw an error at startup indicating which variable is absent.
-
-This robust pattern ensures that you receive precise feedback if, for example, your bot token is invalid, the channel ID is incorrect, or you lack the required scope.
-
----
-
-## Troubleshooting
-
-* **“Missing SLACK\_BOT\_TOKEN or SLACK\_CHANNEL\_ID in .env”**
-  – Ensure you have a `.env` file in the project root and that both variables are defined. Run `cp .env.example .env` if necessary and update accordingly.
-
-* **“channel\_not\_found” or “not\_in\_channel”**
-  – Verify that the `SLACK_CHANNEL_ID` is correct and that your Bot User has been invited to that channel (or add `chat:write.public` scope if posting to public channels where it is not yet a member).
-
-* **“invalid\_auth”**
-  – The provided bot token is invalid or revoked. Double-check your `SLACK_BOT_TOKEN` and re-install the Slack App to generate a new token if needed.
-
-* **“is\_archived”**
-  – The channel you are targeting is archived. Unarchive the channel or use a different one.
-
-* **Rate Limiting (`ratelimited_error`)**
-  – Slack imposes rate limits. If you exceed these limits, wait a few seconds before retrying. Implement backoff logic if you plan to send many messages programmatically.
-
----
-
-## License
-
-This project is released under the [MIT License](./LICENSE).
-
----
-
-**End of Document**
-
-```
 ```
