@@ -17,7 +17,7 @@ This repository contains a modular Node.js application for performing basic Slac
 7. [Troubleshooting](#troubleshooting)  
 8. [License](#license)  
 
----
+
 
 ## Prerequisites
 
@@ -41,7 +41,7 @@ Before using this application, ensure that:
 
    ```bash
    cp .env.example .env
-````
+
 
 ## Installation
 
@@ -50,15 +50,12 @@ Before using this application, ensure that:
    ```bash
    git clone https://your-repo-url.git
    cd task
-   ```
 
 2. **Install dependencies**:
 
    ```bash
    npm install
-   ```
 
----
 
 ## Usage
 
