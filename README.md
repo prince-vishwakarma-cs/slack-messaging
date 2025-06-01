@@ -13,10 +13,6 @@ This repository contains a modular Node.js application for performing basic Slac
    - [Retrieve a Message](#retrieve-a-message)  
    - [Update a Message](#update-a-message)  
    - [Delete a Message](#delete-a-message)  
-6. [Error Handling](#error-handling)  
-7. [Troubleshooting](#troubleshooting)  
-8. [License](#license)  
-
 
 
 ## Prerequisites
